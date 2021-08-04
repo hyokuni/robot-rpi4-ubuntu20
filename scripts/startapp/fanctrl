@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# fanctrl initscript
+#
+### BEGIN INIT INFO
+# Provides:          fanctrl
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: adaptive fan control
+### END INIT INFO
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
+WORK_DIR="/home/ubuntu/robot_raspi4_ubuntu/pyspace/scp_fanctrl"
+FILE_NAME="rpi4_fanctrl_loop_210803.py"
+
+start(){
+	cd $WORK_DIR
+	sudo python3 $FILE_NAME &
+	echo "Python program is started."
+}
+
+stop(){	
+	pid=$(ps aux | grep $FILE_NAME | awk '{print $2}')
+	if [ -n "$pid" ]
+	then
+		sudo kill -9 $pid
+	fi
+	sleep 1
+	echo "Python program is stopped."
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "Error init script"
+		exit 1
+		;;
+esac
+exit 0

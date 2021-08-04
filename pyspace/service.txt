@@ -11,3 +11,14 @@ https://www.debuntu.org/how-to-managing-services-with-update-rc-d/
 update-rc.d <service> defaults 99
 
 수정 후 /etc/rc0.d/ ~ /etc/rc6.d/에서 K,S 뒤 번호를 수정하여 조정 함
+
+#21.08.03 추가 내용
+https://jcdgods.tistory.com/360
+
+등록할 디렉토리: /etc/init.d/
+등록명령어 : sudo update-rc.d <service> defaults
+서비스 권한이 없다면 : sudo chmod +x /etc/init.d/<service>
+명령어 실행시 등록되는 장소 : /etc/rc0~6.d/
+
+내용 스크립트에 시작, 종료 번호를 써 넣으면 default로 등록하면 써놓지 않은 서비스는 등록되지 않음
+
